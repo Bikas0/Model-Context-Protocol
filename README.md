@@ -5,7 +5,7 @@
 <ol>
 <li>Download the Cursor IDE</li>
 
-<li>Right click the IDE file and go to propertise and activate Executable as Program<li>
+<li>Right click the IDE file and go to propertise and activate Executable as Program</li>
 
 <li>Open the Cursor IDE</li>
 
@@ -43,7 +43,7 @@ cd squashfs-root
 ./AppRun
 ```
 
-<li>uv</li>
+### uv
 
 <li>Create venv using uv</li>
 
