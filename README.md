@@ -1,68 +1,72 @@
 # Model Context Protocol
 
-## Download the Cursor IDE
+### Step by step process
 
-## Right click the IDE file and go to propertise and activate Executable as Program
+<ol>
+<li>Download the Cursor IDE</li>
 
-# Open the Cursor IDE
+<li>Right click the IDE file and go to propertise and activate Executable as Program<li>
+
+<li>Open the Cursor IDE</li>
 
 ```bash
 sudo apt-get install --reinstall ubuntu-desktop
 ```
 
-# Go to Cursor IDE file Directory Localtion
+<li>Go to Cursor IDE file Directory Localtion</li>
 
 ```bash
 cd Desktop/
 ```
 
-# Run the below Command
+<li>Run the below Command</li>
 
 ```bash
 chmod +x Cursor-0.49.4-x86_64.AppImage 
 ```
 
-# Provide Permission
+<li>Provide Permission</li>
 
 ```bash
 sudo chmod 4755 /home/bikas/Desktop/squashfs-root/usr/share/cursor/chrome-sandbox
 ```
 
-# Go to the squashfs-root directory
+<li>Go to the squashfs-root directory</li>
 
 ```bash
 cd squashfs-root
 ```
 
-# For run the IDE
+<li>For run the IDE</li>
 
 ```bash
 ./AppRun
 ```
 
-### uv
+<li>uv</li>
 
-# Create venv using uv
+<li>Create venv using uv</li>
 
 ```bash
 uv venv
 ```
 
-# Activate venv
+<li>Activate venv</li>
 
 ```bash
 source .venv/bin/activate
 ```
 
-# Install Library
+<li>Install Library</li>
 
 ```bash
 uv add langchain-groq
 uv add pandas
 ```
 
-# Run file
+<li>Run file</li>
 
 ```bash
 uv run app.py
 ```
+</ol>
