@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from langchain_groq import ChatGroq
 from langchain_google_genai import ChatGoogleGenerativeAI
 from mcp_use import MCPAgent, MCPClient
-import os
+import os, re
 import time
 
 async def classify_companies():
@@ -62,9 +62,9 @@ async def classify_companies():
             
             # Create a prompt to search and classify the company
             prompt = f"""
-            Search online for detailed information about: {company_name}
+            You are an expert for finding the key information about the company {company_name}
             
-            After searching, analyze the company's:
+            After finding the key information, analyze the company's:
             1. Main business activities
             2. Services provided
             3. Industry sector
@@ -73,10 +73,10 @@ async def classify_companies():
             Available company types:
             {', '.join(company_types)}
             
-            Based on the search results:
+            Based on the key information:
             1. If the company's main business matches any of the provided types, return that type
-            2. If no match is found, return 'others'
-            3. Return only the classification type
+            2. If no match is found with the company type, return 'others'
+            3. Always have to return the final answer"
             """
             
             try:
@@ -101,24 +101,20 @@ async def classify_companies():
                 
                 # Clean up the response
                 classification = classification.strip().lower()
-                print(f"Raw classification: {classification}")
-                
-                # Check if the classification matches any of the company types
-                matched_type = 'others'  # Default to 'others'
-                for type_name in company_types:
-                    if type_name.lower() in classification:
-                        matched_type = type_name
-                        break
-                
-                
+                # print(f"Raw classification: {classification}")
+
+                match = re.search(r"final answer:\s*(.+)", classification, re.IGNORECASE)
+                if match:
+                    final_answer = match.group(1)
+                print("-"*50)
                 print(f"Company Name: {company_name}")
-                print(f"Company Type: {matched_type}")
+                print(f"Company Type: {final_answer}")
                 print("-"*50)
                 
                 # Add the result to the results DataFrame
                 results_df = pd.concat([results_df, pd.DataFrame({
                     'Company Name': [company_name],
-                    'Company Type': [matched_type],
+                    'Company Type': [final_answer],
                     'Reasoning': [classification]  # Store the full classification reasoning
                 })], ignore_index=True)
                 
@@ -129,8 +125,6 @@ async def classify_companies():
             except Exception as e:
                 print(f"Error processing {company_name}: {str(e)}")
                 # Print error result
-                print("\n" + "-"*50)
-                print(f"Company Name: {company_name}")
                 print("Company Type: others (Error)")
                 print("-"*50)
                 
