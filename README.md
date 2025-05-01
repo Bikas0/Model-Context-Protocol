@@ -70,3 +70,14 @@ uv add pandas
 uv run app.py
 ```
 </ol>
+
+For open Cursor IDE using Command 
+
+```bash
+sudo apt-get install --reinstall ubuntu-desktop
+cd Desktop/ # IDE Location Directory
+chmod +x Cursor-0.49.4-x86_64.AppImage 
+sudo chmod 4755 /home/bikas/Desktop/squashfs-root/usr/share/cursor/chrome-sandbox
+cd squashfs-root
+./AppRun
+```
